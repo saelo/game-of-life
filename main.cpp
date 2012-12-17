@@ -10,7 +10,7 @@
 #include <GL/glut.h>
 #include <time.h>
 
-#include "gof.h"
+#include "gofl.h"
 
 using namespace std;
 
@@ -65,7 +65,7 @@ int main(int argc, char** argv) {
     int worldHeight = screenHeight / (creatureSize + borderSize);
 
     cout << "\n------------------------------" << endl;
-    cout << "Game Of Life by saelo" << endl;
+    cout << "Game of Life by saelo" << endl;
     cout << "------------------------------\n" << endl;
     cout << "Screen Dimensions: " << screenWidth << " x " << screenHeight << endl;
     cout << "Creature Size: " << creatureSize << endl;

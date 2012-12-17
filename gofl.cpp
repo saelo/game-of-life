@@ -9,7 +9,7 @@
 #include <iostream>
 #include <time.h>
 
-#include "gof.h"
+#include "gofl.h"
 
 using namespace std;
 

@@ -2,8 +2,8 @@ CC=     g++
 LD=     ld
 CFLAGS= -g -W -Wall
 LDFLAGS=-lGL -lglut
-TARGET= gof
-SRC=    main.cpp view.cpp gof.cpp
+TARGET= gofl
+SRC=    main.cpp view.cpp gofl.cpp
 OBJ=    $(SRC:.cpp=.o)
 
 $(TARGET): $(OBJ)
