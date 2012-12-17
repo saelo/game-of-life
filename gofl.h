@@ -19,7 +19,6 @@ public:
     static const int MAX_HEALTH;
 
     GameOfLife(int w, int h);
-    virtual ~GameOfLife();
 
     void run();
     void calcNextGeneration();

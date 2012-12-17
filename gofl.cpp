@@ -17,7 +17,6 @@ using namespace std;
 const int GameOfLife::MAX_HEALTH = 1000;
 
 
-
 inline int mod(int a, int b) {
     int c = a % b;
     if (c < 0) {
@@ -41,10 +40,6 @@ GameOfLife::GameOfLife(int w, int h) {
 
 }
 
-GameOfLife::~GameOfLife() {
-    // TODO Auto-generated destructor stub
-}
-
 void GameOfLife::run() {
     this->running = true;
     while (running) {
@@ -64,7 +59,7 @@ void GameOfLife::calcNextGeneration() {
                     // birth of a new creature
                     this->tmpWorld[x][y] = this->MAX_HEALTH;
                 }
-            } else if (this->tmpWorld[x][y] == this->MAX_HEALTH) {         // else { ...
+            } else if (this->tmpWorld[x][y] == this->MAX_HEALTH) {    
                 // mark creature as dead
                 this->tmpWorld[x][y] = this->tmpWorld[x][y] / 1.1;
             }
@@ -80,7 +75,6 @@ void GameOfLife::calcNextGeneration() {
     this->tmpWorld = tmp;
 
     this->generations++;
-    //cout << "Generation " << this->generations << " done" << endl;
 
     if (this->view != NULL) {
         this->view->update(this->world);
