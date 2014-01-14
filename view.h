@@ -1,31 +1,17 @@
-/*
- * View.h
- *
- *  Created on: Jun 14, 2012
- *      Author: Samuel Groß
- */
-
 #ifndef VIEW_H
 #define VIEW_H
 
-class View
-{
+class View {
 public:
-    View();
-    virtual ~View();
+    static const int CREATURE_SIZE = 1;
+    static const int BORDER_SIZE = 1;
 
-    void init(int screenW, int screenH, int worldWidth, int worldHeight, int creatureSize, int borderSize);
+    void init(int screenW, int screenH, int worldWidth, int worldHeight);
     void resize(int width, int height);
-    void draw();
-    void update(int** world);
+    void draw(int** world);
 
 private:
-    int** world;
-    int worldWidth;
-    int worldHeight;
-    int creatureSize;
-    int borderSize;
-
+    int worldWidth, worldHeight;
 };
 
-#endif 
+#endif

@@ -1,7 +1,7 @@
 cmake_minimum_required (VERSION 2.6)
 project (Game-Of-Life)
 
-add_executable (game-of-life main.cpp gofl.cpp view.cpp)
+add_executable (game-of-life main.cpp game.cpp view.cpp)
 
 find_package(OpenGL REQUIRED)
 find_package(GLUT REQUIRED)

@@ -1,16 +1,10 @@
-/*
- * Main.cpp
- *
- *  Created on: Jun 14, 2012
- *      Author: Samuel Groß <dev@samuel-gross.de>
- */
-
 #include <iostream>
 #include <GL/gl.h>
 #include <GL/glut.h>
 #include <time.h>
 
-#include "gofl.h"
+#include "game.h"
+#include "view.h"
 
 using namespace std;
 
@@ -19,40 +13,44 @@ int screenWidth  = 1280;
 int screenHeight = 800;
 const bool fullscreen  = true;
 
-const int creatureSize = 1;
-const int borderSize   = 1;
-
 long start  = 0;
 long frames = 0;
 
-GameOfLife* gol = NULL;
+GameOfLife* game = NULL;
 View* view = NULL;
 
 
-void resize(int w, int h) {
+void resize(int w, int h)
+{
     view->resize(w, h);
 }
 
-void renderFunction() {
-    gol->calcNextGeneration();
+void renderFunction()
+{
+    game->nextGeneration();
+    view->draw(game->getWorld());
     glutSwapBuffers();
     frames++;
 }
 
-void printFPS() {
+void stats()
+{
     long ticks = clock() - start;
     double seconds = ((double) ticks) / CLOCKS_PER_SEC;
     double fps = frames / seconds;
     cout << "fps: " << fps << endl;
+    cout << game->numGenerations() << " generations" << endl;
 }
 
-void key(unsigned char k, int x, int y) {
-    printFPS();
+void onKey(unsigned char k, int x, int y)
+{
+    stats();
     exit(0);
 }
 
 
-int main(int argc, char** argv) {
+int main(int argc, char** argv)
+{
     glutInit(&argc, argv);
 
     view = new View();
@@ -61,18 +59,17 @@ int main(int argc, char** argv) {
         screenHeight = glutGet(GLUT_SCREEN_HEIGHT);
     }
 
-    int worldWidth  = screenWidth / (creatureSize + borderSize);
-    int worldHeight = screenHeight / (creatureSize + borderSize);
+    int worldWidth  = screenWidth / (View::CREATURE_SIZE + View::BORDER_SIZE);
+    int worldHeight = screenHeight / (View::CREATURE_SIZE + View::BORDER_SIZE);
 
-    cout << "\n------------------------------" << endl;
+    cout << "------------------------------" << endl;
     cout << "Game of Life by saelo" << endl;
-    cout << "------------------------------\n" << endl;
+    cout << "------------------------------" << endl << endl;
     cout << "Screen Dimensions: " << screenWidth << " x " << screenHeight << endl;
-    cout << "Creature Size: " << creatureSize << endl;
+    cout << "Creature Size: " << View::CREATURE_SIZE << endl;
     cout << "Living Space Dimensions: " << worldWidth << " x " << worldHeight << endl;
 
-    gol = new GameOfLife(worldWidth, worldHeight);
-    gol->addView(view);
+    game = new GameOfLife(worldWidth, worldHeight);
 
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
 
@@ -81,20 +78,17 @@ int main(int argc, char** argv) {
     glutCreateWindow("Game of Life C++");
     glutDisplayFunc(renderFunction);
     glutIdleFunc(renderFunction);
-    glutKeyboardFunc(key);
+    glutKeyboardFunc(onKey);
 
     glutSetCursor(GLUT_CURSOR_NONE);
 
-    if (fullscreen) {
+    if (fullscreen)
         glutFullScreen();
-    }
 
-    view->init(screenWidth, screenHeight, worldWidth, worldHeight, creatureSize, borderSize);
+    view->init(screenWidth, screenHeight, worldWidth, worldHeight);
 
     start = clock();
 
     glutMainLoop();
     return 0;
 }
-
-
