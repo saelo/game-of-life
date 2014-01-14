@@ -12,5 +12,5 @@
 *.la
 *.a
 
-# Executable
-gof
+# Build folder
+build
