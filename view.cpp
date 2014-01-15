@@ -1,6 +1,6 @@
 #include <iostream>
-#include <GL/gl.h>
-#include <GL/glut.h>
+#include <gl.h>
+#include <glut.h>
 
 #include "view.h"
 
